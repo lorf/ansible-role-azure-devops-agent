@@ -2,6 +2,7 @@
   user:
     name: "{{ az_devops_agent_user }}"
     comment: "Azure DevOps Agent"
+    home: "{{ az_devops_agent_user_home }}"
     shell: /bin/bash
 
 - name: Create directories

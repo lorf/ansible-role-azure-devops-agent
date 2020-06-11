@@ -2,3 +2,4 @@ vagrant/.vagrant
 vagrant/*.retry
 vagrant/vars.yml
 .idea/
+meta/.galaxy_install_info

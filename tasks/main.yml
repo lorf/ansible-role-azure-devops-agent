@@ -25,6 +25,19 @@
     group: "{{ az_devops_agent_user }}"
     creates: "{{ az_devops_agent_folder }}/config.sh"
 
+- name: Patch service template
+  when: az_devops_agent_env is defined
+  blockinfile:
+    backup: yes
+    block: |
+      {% for e, v in az_devops_agent_env.iteritems() %}
+      Environment={{e}}={{v}}
+      {% endfor %}
+    insertafter: '^\s*\[Service\]'
+    marker: "# {mark} ANSIBLE MANAGED BLOCK az_devops_agent_env"
+    state: present
+    dest: "{{ az_devops_agent_folder }}/bin/vsts.agent.service.template"
+
 - name: Install dependencies via shipped script
   command: ./bin/installdependencies.sh
   become: true
